@@ -4,4 +4,9 @@ global class VlocityDefaultSandboxRefresh implements SandboxPostCopy
     {
         vlocity_cmt.CorePostInstallClass.runDev2ProdInserts();
     }
+
+    global void runApexClass2(SandboxContext context) 
+    {
+        vlocity_cmt.CorePostInstallClass.runDev2ProdInserts();
+    }
 }
