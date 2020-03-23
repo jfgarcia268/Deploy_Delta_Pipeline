@@ -26,7 +26,7 @@ pipeline {
     stage('SF Deploy') {
       steps {
         script {
-          def folder = new File( './salesforce_sfdx_delta' )
+          def folder = new File( 'salesforce_sfdx_delta' )
           // Remove ols SF Delta Folder
           if (folder.exists()) {
             sh 'rm -rf salesforce_sfdx_delta'
