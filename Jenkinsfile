@@ -27,7 +27,7 @@ pipeline {
         script {
           // Remove ols SF Delta Folder
           if (folder.exists('./salesforce_sfdx_delta')) {
-            //sh 'rm -rf salesforce_sfdx_delta'
+            sh 'rm -rf salesforce_sfdx_delta'
           } 
       	  //Create delta SF Folder
           sh 'sfdx vlocityestools:sfsource:createdeltapackage -u ${ALIAS} -p cmt -d salesforce_sfdx'
