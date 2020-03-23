@@ -24,17 +24,19 @@ pipeline {
     }
     stage('SF Deploy') {
       steps {
+        script {
         // Remove ols SF Delta Folder
-        if (folder.exists('./salesforce_sfdx_delta')) {
-          sh 'rm -rf salesforce_sfdx_delta'
-        } 
-      	//Create delta SF Folder
-        sh 'sfdx vlocityestools:sfsource:createdeltapackage -u ${ALIAS} -p cmt -d salesforce_sfdx'
-        // SF Metadata Deploy - Only if delta Package Exits
-        if (folder.exists('./salesforce_sfdx_delta')) {
-          sh 'sfdx force:source:deploy --sourcepath salesforce_sfdx --targetusername ${SFDX_URL} --verbose'
-        } else {
-          sh 'echo "### NO SF DELTA-FOLDER FOUND"'
+          if (folder.exists('./salesforce_sfdx_delta')) {
+            sh 'rm -rf salesforce_sfdx_delta'
+          } 
+      	 //Create delta SF Folder
+          sh 'sfdx vlocityestools:sfsource:createdeltapackage -u ${ALIAS} -p cmt -d salesforce_sfdx'
+          // SF Metadata Deploy - Only if delta Package Exits
+          if (folder.exists('./salesforce_sfdx_delta')) {
+            sh 'sfdx force:source:deploy --sourcepath salesforce_sfdx --targetusername ${SFDX_URL} --verbose'
+          } else {
+            sh 'echo "### NO SF DELTA-FOLDER FOUND"'
+          }
         }
 		    
       }
