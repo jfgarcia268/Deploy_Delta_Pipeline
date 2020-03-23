@@ -31,6 +31,7 @@ pipeline {
           } 
       	 //Create delta SF Folder
           sh 'sfdx vlocityestools:sfsource:createdeltapackage -u ${ALIAS} -p cmt -d salesforce_sfdx'
+          sh 'ls -la'
           // SF Metadata Deploy - Only if delta Package Exits
           if (folder.exists('./salesforce_sfdx_delta')) {
             sh 'sfdx force:source:deploy --sourcepath salesforce_sfdx --targetusername ${SFDX_URL} --verbose'
