@@ -26,16 +26,15 @@ pipeline {
     stage('SF Deploy') {
       steps {
         script {
-          def folder = new File( 'salesforce_sfdx_delta' )
           // Remove ols SF Delta Folder
-          if (folder.exists()) {
+          if (fileExists('salesforce_sfdx_delta')) {
             sh 'rm -rf salesforce_sfdx_delta'
           } 
       	  //Create delta SF Folder
           sh 'sfdx vlocityestools:sfsource:createdeltapackage -u ${SFDX_URL} -p cmt -d salesforce_sfdx'
           sh 'ls -la'
           // SF Metadata Deploy - Only if delta Package Exits
-          if (folder.exists()) {
+          if (fileExists('salesforce_sfdx_delta')) {
             sh 'echo "### SF DELTA-FOLDER FOUND - Deploying now..."'
             sh 'sfdx force:source:deploy --sourcepath salesforce_sfdx_delta --targetusername ${SFDX_URL} --verbose'
           } else {
