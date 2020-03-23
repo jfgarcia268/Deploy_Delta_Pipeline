@@ -6,10 +6,11 @@ pipeline {
     stage('Install VBT, SFDX-CLI and vlocityestools ') {
       steps {
       	// Step to Install and Setup VBT and SFDX-CLI
-		    sh 'node -v'
-		    sh 'npm install -g vlocity sfdx-cli'
-		    sh 'npm install -g sfdx-cli'
+        sh 'node -v'
+        sh 'npm install -g vlocity'
+        sh 'npm install -g sfdx-cli'
         sh 'sfdx plugins:install vlocityestools'
+        sh 'sfdx plugins:update --verbose'
       }
     }
     stage('SFDX-Auth') {
